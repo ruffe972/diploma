@@ -1,2 +1,2 @@
-# app-launcher-for-children
-Мобильное приложение для ограничения использования мобильного устройства родителями
+# Android App Launcher for Children
+App launcher with parental controls. This program is in early stages of development.
