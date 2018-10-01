@@ -35,7 +35,7 @@ class AllAppsViewAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-        holder.appNameView.text = item.appName
+        holder.appNameView.text = item.labelName
         holder.iconView.setImageDrawable(item.icon)
 
         with(holder.view) {

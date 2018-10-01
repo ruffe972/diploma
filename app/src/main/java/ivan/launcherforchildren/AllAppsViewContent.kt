@@ -12,16 +12,17 @@ class AllAppsViewContent(context: Context) {
     init {
         val pm = context.packageManager
         val intent = Intent(Intent.ACTION_MAIN, null).addCategory(Intent.CATEGORY_LAUNCHER)
-        val activities = pm.queryIntentActivities(intent, 0)
+        val resolveInfos = pm.queryIntentActivities(intent, 0)
 
-        fun activityToAllAppsViewItem(activity: ResolveInfo): AllAppsViewItem {
-            val label = activity.loadLabel(pm).toString()
-            val icon = activity.loadIcon(pm)
-            return AllAppsViewItem(label, icon)
+        fun activityToAllAppsViewItem(resolveInfo: ResolveInfo): AllAppsViewItem {
+            return AllAppsViewItem(
+                    resolveInfo.activityInfo.packageName,
+                    resolveInfo.loadLabel(pm).toString(),
+                    resolveInfo.loadIcon(pm))
         }
 
-        items = activities.map(::activityToAllAppsViewItem)
+        items = resolveInfos.map(::activityToAllAppsViewItem)
     }
 
-    data class AllAppsViewItem(val appName: String, val icon: Drawable)
+    data class AllAppsViewItem(val packageName: String, val labelName: String, val icon: Drawable)
 }

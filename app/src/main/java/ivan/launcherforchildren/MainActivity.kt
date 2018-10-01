@@ -12,5 +12,11 @@ class MainActivity : AppCompatActivity(), AllAppsFragment.OnAllAppsFragmentInter
 
     override fun onAllAppsFragmentInteraction(
             allAppsViewItem: AllAppsViewContent.AllAppsViewItem?) {
+        if (allAppsViewItem != null) {
+            val pm = applicationContext.packageManager
+            // TODO: an app can have several launchable activities, I think.
+            val intent = pm.getLaunchIntentForPackage(allAppsViewItem.packageName)
+            startActivity(intent)
+        }
     }
 }
