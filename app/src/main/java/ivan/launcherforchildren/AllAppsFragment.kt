@@ -3,10 +3,10 @@ package ivan.launcherforchildren
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.GridView
 
 class AllAppsFragment : Fragment() {
 
@@ -19,7 +19,7 @@ class AllAppsFragment : Fragment() {
         val context = activity?.applicationContext
         if (context != null) {
             val items = AllAppsViewContent(context).items
-            (view as RecyclerView).adapter = AllAppsViewAdapter(items, listener)
+            (view as GridView).adapter = AllAppsAdapter(items, listener)
         }
         return view
     }
