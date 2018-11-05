@@ -6,20 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import ivan.launcherforchildren.AllAppsFragment.OnAllAppsFragmentInteractionListener
-import ivan.launcherforchildren.AllAppsViewContent.AllAppsViewItem
-import kotlinx.android.synthetic.main.fragment_all_apps_item.view.*
+import ivan.launcherforchildren.AllAppsFragment.OnFragmentInteractionListener
+import kotlinx.android.synthetic.main.all_apps_item.view.*
 
 class AllAppsViewAdapter(
-        private val values: List<AllAppsViewItem>,
-        private val listener: OnAllAppsFragmentInteractionListener?)
+        private val values: List<AllAppsViewContent.Item>,
+        private val listener: OnFragmentInteractionListener?)
     : RecyclerView.Adapter<AllAppsViewAdapter.ViewHolder>() {
 
     private val onClickListener: View.OnClickListener
 
     init {
         onClickListener = View.OnClickListener { v ->
-            val item = v.tag as AllAppsViewItem
+            val item = v.tag as AllAppsViewContent.Item
             // Notify the activity that an item has been selected.
             listener?.onAllAppsFragmentInteraction(item)
         }
@@ -29,7 +28,7 @@ class AllAppsViewAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).
-                inflate(R.layout.fragment_all_apps_item, parent, false)
+                inflate(R.layout.all_apps_item, parent, false)
         return ViewHolder(view)
     }
 

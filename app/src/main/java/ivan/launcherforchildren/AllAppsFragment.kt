@@ -7,16 +7,15 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import ivan.launcherforchildren.AllAppsViewContent.AllAppsViewItem
 
 class AllAppsFragment : Fragment() {
 
-    private var listener: OnAllAppsFragmentInteractionListener? = null
+    private var listener: OnFragmentInteractionListener? = null
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_all_apps_list, container, false)
+        val view = inflater.inflate(R.layout.fragment_all_apps, container, false)
         val context = activity?.applicationContext
         if (context != null) {
             val items = AllAppsViewContent(context).items
@@ -27,11 +26,11 @@ class AllAppsFragment : Fragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        if (context is OnAllAppsFragmentInteractionListener) {
+        if (context is OnFragmentInteractionListener) {
             listener = context
         } else {
             throw RuntimeException(context.toString() +
-                    " must implement OnAllAppsFragmentInteractionListener")
+                    " must implement AllAppsFragment.OnFragmentInteractionListener")
         }
     }
 
@@ -40,8 +39,8 @@ class AllAppsFragment : Fragment() {
         listener = null
     }
 
-    interface OnAllAppsFragmentInteractionListener {
-        fun onAllAppsFragmentInteraction(allAppsViewItem: AllAppsViewItem?)
+    interface OnFragmentInteractionListener {
+        fun onAllAppsFragmentInteraction(allAppsViewItem: AllAppsViewContent.Item)
     }
 
 }

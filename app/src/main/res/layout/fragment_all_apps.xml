@@ -10,4 +10,4 @@
     android:layout_marginRight="16dp"
     app:layoutManager="android.support.v7.widget.LinearLayoutManager"
     tools:context=".AllAppsFragment"
-    tools:listitem="@layout/fragment_all_apps_item" />
+    tools:listitem="@layout/all_apps_item" />

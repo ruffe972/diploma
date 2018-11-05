@@ -3,7 +3,7 @@ package ivan.launcherforchildren
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 
-class MainActivity : AppCompatActivity(), AllAppsFragment.OnAllAppsFragmentInteractionListener {
+class MainActivity : AppCompatActivity(), AllAppsFragment.OnFragmentInteractionListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -11,12 +11,10 @@ class MainActivity : AppCompatActivity(), AllAppsFragment.OnAllAppsFragmentInter
     }
 
     override fun onAllAppsFragmentInteraction(
-            allAppsViewItem: AllAppsViewContent.AllAppsViewItem?) {
-        if (allAppsViewItem != null) {
-            val pm = applicationContext.packageManager
-            // TODO: an app can have several launchable activities, I think.
-            val intent = pm.getLaunchIntentForPackage(allAppsViewItem.packageName)
-            startActivity(intent)
-        }
+            allAppsViewItem: AllAppsViewContent.Item) {
+        val pm = applicationContext.packageManager
+        // TODO: an app can have several launchable activities, I think.
+        val intent = pm.getLaunchIntentForPackage(allAppsViewItem.packageName)
+        startActivity(intent)
     }
 }
