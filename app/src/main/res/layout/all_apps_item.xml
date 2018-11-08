@@ -7,18 +7,18 @@
 
     <ImageView
         android:id="@+id/icon"
-        android:contentDescription="@string/app_icon_description"
+        android:contentDescription="@string/app_icon_cd"
         android:layout_width="@dimen/icon_size"
         android:layout_height="@dimen/icon_size"
+        android:layout_gravity="center_horizontal"
         android:src="@mipmap/ic_launcher" />
 
     <TextView
         android:id="@+id/app_name"
-        android:layout_width="match_parent"
+        android:layout_width="32pt"
         android:layout_height="match_parent"
-        android:gravity="center_horizontal"
-        android:lines="1"
-        android:textSize="6pt"
-        android:ellipsize="end"
-        tools:text="App name" />
+        tools:text="App name"
+        tools:textColor="@android:color/black"
+        tools:background="@android:color/holo_blue_light"
+        style="@style/AppIconNameTheme" />
 </LinearLayout>

@@ -9,5 +9,7 @@
     android:verticalSpacing="20dp"
     android:gravity="center"
     android:stretchMode="spacingWidthUniform"
+    android:paddingTop="20dp"
+    android:paddingBottom="15dp"
     tools:context=".AllAppsFragment"
     tools:listitem="@layout/all_apps_item" />

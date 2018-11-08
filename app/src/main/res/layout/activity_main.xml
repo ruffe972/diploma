@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/wallpaper_cd"
+        app:srcCompat="@drawable/wallpaper" />
+
     <fragment android:name="ivan.launcherforchildren.AllAppsFragment"
         android:id="@+id/all_apps_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-</android.support.constraint.ConstraintLayout>
+</FrameLayout>
