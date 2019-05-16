@@ -5,7 +5,8 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        tools:context=".MainActivity"
+>
 
     <ImageView
             android:id="@+id/wallpaper"
@@ -13,20 +14,23 @@
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/wallpaper"
-            tools:ignore="ContentDescription"/>
+            tools:ignore="ContentDescription"
+    />
 
     <androidx.viewpager.widget.ViewPager
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toTopOf="@+id/dock"
-            app:layout_constraintTop_toTopOf="parent">
-    </androidx.viewpager.widget.ViewPager>
+            app:layout_constraintTop_toTopOf="parent"
+    />
 
     <View
             android:id="@+id/dock"
             android:layout_width="match_parent"
             android:layout_height="90dp"
             android:background="#50ffffff"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+    />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
