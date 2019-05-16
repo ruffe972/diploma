@@ -25,13 +25,10 @@ class HomeAppGridFragment : Fragment() {
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
-        if (context !is MainActivity) {
-            throw RuntimeException("Attach HomeAppGridFragment only to MainActivity")
-        }
-        if (context is InteractionListener) {
+        if (context is MainActivity) {
             listener = context
         } else {
-            throw RuntimeException("Context must implement HomeAppGridFragment.InteractionListener")
+            throw RuntimeException("Attach HomeAppGridFragment only to MainActivity")
         }
     }
 
