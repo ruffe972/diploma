@@ -3,9 +3,9 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/dock_app"
-        android:layout_width="@dimen/dock_app_icon_size"
-        android:layout_height="@dimen/dock_app_icon_size"
-        android:scaleType="centerInside"
+        android:scaleType="fitCenter"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:src="@mipmap/ic_launcher"
         tools:ignore="ContentDescription"
 />

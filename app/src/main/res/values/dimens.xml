@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="home_grid_app_icon_size">54dp</dimen>
-    <dimen name="dock_app_icon_size">48dp</dimen>
+    <dimen name="vertical_dock_padding">8dp</dimen>
 </resources>

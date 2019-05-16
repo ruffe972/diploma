@@ -16,7 +16,6 @@
             app:srcCompat="@drawable/wallpaper"
             tools:ignore="ContentDescription"
     />
-
     <androidx.viewpager.widget.ViewPager
             android:id="@+id/view_pager"
             android:layout_width="match_parent"
@@ -24,13 +23,14 @@
             app:layout_constraintBottom_toTopOf="@+id/dock"
             app:layout_constraintTop_toTopOf="parent"
     />
-
-    <View
+    <LinearLayout
             android:id="@+id/dock"
             android:layout_width="match_parent"
-            android:layout_height="90dp"
+            android:layout_height="72dp"
+            android:paddingTop="@dimen/vertical_dock_padding"
+            android:paddingBottom="@dimen/vertical_dock_padding"
+            android:orientation="horizontal"
             android:background="#50ffffff"
             app:layout_constraintBottom_toBottomOf="parent"
     />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -76,7 +76,7 @@ class HomeAppGridFragment : Fragment() {
                     setOnClickListener { listener?.onAppClick(appInfo) }
                 }
                 appView.layoutParams = appView.layoutParams.let {
-                    it.height = view.measuredHeight / MainActivityModel.APPS_ROWS_NUMBER
+                    it.height = view.height / MainActivityModel.APPS_ROWS_NUMBER
                     it.width = view.width / MainActivityModel.APPS_COLUMNS_NUMBER
                     it
                 }

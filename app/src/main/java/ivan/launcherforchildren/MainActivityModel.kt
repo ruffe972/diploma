@@ -23,9 +23,8 @@ class MainActivityModel(context: Context) {
         }
 
         val allApps = resolveInfoList.map(::resolveInfoToAppInfo)
-        val appsInDock = 5
-        dockApps = allApps.slice(0 until appsInDock)
-        appInfoLists = allApps.slice(appsInDock until allApps.size)
+        dockApps = allApps.slice(0 until APPS_IN_DOCK)
+        appInfoLists = allApps.slice(APPS_IN_DOCK until allApps.size)
                 .chunked(MAX_APPS_PER_SCREEN)
     }
 
@@ -38,5 +37,6 @@ class MainActivityModel(context: Context) {
         const val APPS_COLUMNS_NUMBER = 4
         const val APPS_ROWS_NUMBER = 5
         const val MAX_APPS_PER_SCREEN = APPS_COLUMNS_NUMBER * APPS_ROWS_NUMBER
+        const val APPS_IN_DOCK = 5
     }
 }
