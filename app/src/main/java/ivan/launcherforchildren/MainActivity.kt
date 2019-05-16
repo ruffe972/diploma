@@ -4,7 +4,13 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), HomeAppGridFragment.InteractionListener {
+
+    override fun onAppClick(appInfo: MainActivityModel.AppInfo) {
+        val intent = applicationContext.packageManager
+                .getLaunchIntentForPackage(appInfo.packageName)
+        startActivity(intent)
+    }
 
     var model: MainActivityModel? = null
 

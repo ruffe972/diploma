@@ -1,5 +1,6 @@
 package ivan.launcherforchildren
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,9 +15,30 @@ import android.widget.TableLayout
 private const val ARG_SCREEN_NUMBER = "screen_number"
 
 // Single grid of apps on the home screen above the dock.
-// Attach only to MainActivity.
 class HomeAppGridFragment : Fragment() {
     private var appInfoList: List<AppInfo>? = null
+    private var listener: InteractionListener? = null
+
+    interface InteractionListener {
+        fun onAppClick(appInfo: AppInfo)
+    }
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        if (context !is MainActivity) {
+            throw RuntimeException("Attach HomeAppGridFragment only to MainActivity")
+        }
+        if (context is InteractionListener) {
+            listener = context
+        } else {
+            throw RuntimeException("Context must implement HomeAppGridFragment.InteractionListener")
+        }
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        listener = null
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +61,6 @@ class HomeAppGridFragment : Fragment() {
         }
     }
 
-    // view is fragment's view
     private fun fillGrid(view: ViewGroup) {
         val appInfoMatrix = (appInfoList ?: return)
                 .chunked(MainActivityModel.APPS_COLUMNS_NUMBER)
@@ -52,9 +73,10 @@ class HomeAppGridFragment : Fragment() {
             for (appInfo in appInfoRow) {
                 val appView = LayoutInflater.from(activity)
                         .inflate(R.layout.home_grid_app, tableRow, false)
-                appView.linear_layout.apply {
+                appView.apply {
                     app_name.text = appInfo.labelName
                     icon.setImageDrawable(appInfo.icon)
+                    setOnClickListener { listener?.onAppClick(appInfo) }
                 }
                 appView.layoutParams = appView.layoutParams.let {
                     it.height = view.measuredHeight / MainActivityModel.APPS_ROWS_NUMBER
