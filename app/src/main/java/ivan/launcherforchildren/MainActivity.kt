@@ -1,19 +1,19 @@
 package ivan.launcherforchildren
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), AllAppsFragment.OnFragmentInteractionListener {
+class MainActivity : AppCompatActivity() {
+
+    var model: MainActivityModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-    }
-
-    override fun onAllAppsFragmentInteraction(allAppsViewItem: AllAppsViewContent.Item) {
-        val pm = applicationContext.packageManager
-        // TODO: an app can have several launchable activities, I think.
-        val intent = pm.getLaunchIntentForPackage(allAppsViewItem.packageName)
-        startActivity(intent)
+        model = MainActivityModel(applicationContext)
+        model?.let {
+            view_pager.adapter = HomePagerAdapter(supportFragmentManager, it)
+        }
     }
 }

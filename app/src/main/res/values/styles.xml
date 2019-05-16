@@ -1,5 +1,4 @@
 <resources>
-
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
@@ -18,5 +17,4 @@
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">6pt</item>
     </style>
-    
 </resources>
