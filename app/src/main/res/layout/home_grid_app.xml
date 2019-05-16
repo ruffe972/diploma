@@ -8,8 +8,8 @@
 >
         <ImageView
                 android:id="@+id/icon"
-                android:layout_width="@dimen/icon_size"
-                android:layout_height="@dimen/icon_size"
+                android:layout_width="@dimen/home_grid_app_icon_size"
+                android:layout_height="@dimen/home_grid_app_icon_size"
                 android:src="@mipmap/ic_launcher"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -18,7 +18,6 @@
                 app:layout_constraintVertical_chainStyle="packed"
                 tools:ignore="ContentDescription"
         />
-
         <TextView
                 android:id="@+id/app_name"
                 android:layout_width="70dp"
