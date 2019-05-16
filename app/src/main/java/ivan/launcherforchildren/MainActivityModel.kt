@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable
 class MainActivityModel(context: Context) {
 
     val appInfoLists: List<List<AppInfo>>
+    val dockApps: List<AppInfo>
 
     init {
         val packageManager = context.packageManager
@@ -21,8 +22,10 @@ class MainActivityModel(context: Context) {
                     resolveInfo.loadIcon(packageManager))
         }
 
-        appInfoLists = resolveInfoList
-                .map(::resolveInfoToAppInfo)
+        val allApps = resolveInfoList.map(::resolveInfoToAppInfo)
+        val appsInDock = 5
+        dockApps = allApps.slice(0 until appsInDock)
+        appInfoLists = allApps.slice(appsInDock until allApps.size)
                 .chunked(MAX_APPS_PER_SCREEN)
     }
 

@@ -19,10 +19,10 @@
 
         <ImageView
                 android:id="@+id/icon"
-                android:contentDescription="@string/app_icon_cd"
                 android:layout_width="@dimen/icon_size"
                 android:layout_height="@dimen/icon_size"
-                android:src="@mipmap/ic_launcher"/>
+                android:src="@mipmap/ic_launcher"
+                tools:ignore="ContentDescription"/>
 
         <TextView
                 android:id="@+id/app_name"
