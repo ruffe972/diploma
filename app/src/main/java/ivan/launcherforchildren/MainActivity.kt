@@ -7,9 +7,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.dock_app.view.*
 
 class MainActivity : AppCompatActivity(), HomeAppGridFragment.InteractionListener {
-    var model: MainActivityModel? = null
+    val model = MainActivityModel()
 
-    override fun onAppClick(appInfo: MainActivityModel.AppInfo) {
+    override fun onAppClick(appInfo: AppInfo) {
         val intent = applicationContext.packageManager
                 .getLaunchIntentForPackage(appInfo.packageName)
         startActivity(intent)
@@ -18,8 +18,6 @@ class MainActivity : AppCompatActivity(), HomeAppGridFragment.InteractionListene
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        model = MainActivityModel(applicationContext)
-        val model = model ?: return
         view_pager.adapter = HomePagerAdapter(supportFragmentManager, model)
 
         val viewTreeObserver = dock.viewTreeObserver
@@ -34,7 +32,6 @@ class MainActivity : AppCompatActivity(), HomeAppGridFragment.InteractionListene
     }
 
     private fun initDock() {
-        val model = model ?: return
         for (appInfo in model.dockApps) {
             val iconView = layoutInflater.inflate(R.layout.dock_app, content, false)
                     .dock_app

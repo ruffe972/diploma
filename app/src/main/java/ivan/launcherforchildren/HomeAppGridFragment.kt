@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TableRow
 import androidx.fragment.app.Fragment
-import ivan.launcherforchildren.MainActivityModel.AppInfo
 import kotlinx.android.synthetic.main.home_grid_app.view.*
 import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.widget.TableLayout
@@ -42,8 +41,7 @@ class HomeAppGridFragment : Fragment() {
         val screenNumber = arguments?.getInt(ARG_SCREEN_NUMBER) ?: 0
         appInfoList = (activity as MainActivity)
                 .model
-                ?.appInfoLists
-                ?.get(screenNumber)
+                .appInfoLists[screenNumber]
     }
 
     override fun onCreateView(
