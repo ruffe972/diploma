@@ -15,11 +15,11 @@ private const val ARG_SCREEN_NUMBER = "screen_number"
 
 // Single grid of apps on the home screen above the dock.
 class HomeAppGridFragment : Fragment() {
-    private var appInfoList: List<AppInfo>? = null
+    private var activityInfoList: List<ActivityInfo>? = null
     private var listener: InteractionListener? = null
 
     interface InteractionListener {
-        fun onAppClick(appInfo: AppInfo)
+        fun onAppClick(activityInfo: ActivityInfo)
     }
 
     override fun onAttach(context: Context?) {
@@ -39,9 +39,9 @@ class HomeAppGridFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val screenNumber = arguments?.getInt(ARG_SCREEN_NUMBER) ?: 0
-        appInfoList = (activity as MainActivity)
+        activityInfoList = (activity as MainActivity)
                 .model
-                .appInfoLists[screenNumber]
+                .activityLists[screenNumber]
     }
 
     override fun onCreateView(
@@ -57,7 +57,7 @@ class HomeAppGridFragment : Fragment() {
     }
 
     private fun fillGrid(view: ViewGroup) {
-        val appInfoMatrix = (appInfoList ?: return)
+        val appInfoMatrix = (activityInfoList ?: return)
                 .chunked(MainActivityModel.APPS_COLUMNS_NUMBER)
         for (appInfoRow in appInfoMatrix) {
             val tableRow = TableRow(activity).apply {

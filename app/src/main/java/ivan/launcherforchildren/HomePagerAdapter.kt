@@ -9,5 +9,5 @@ class HomePagerAdapter(
 
     override fun getItem(position: Int) = HomeAppGridFragment.newInstance(position)
 
-    override fun getCount(): Int = model.appInfoLists.count()
+    override fun getCount(): Int = model.activityLists.count()
 }

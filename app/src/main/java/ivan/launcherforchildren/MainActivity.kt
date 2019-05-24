@@ -1,5 +1,7 @@
 package ivan.launcherforchildren
 
+import android.content.ComponentName
+import android.content.Intent
 import android.os.Bundle
 import android.view.ViewTreeObserver
 import androidx.appcompat.app.AppCompatActivity
@@ -9,9 +11,14 @@ import kotlinx.android.synthetic.main.dock_app.view.*
 class MainActivity : AppCompatActivity(), HomeAppGridFragment.InteractionListener {
     val model = MainActivityModel()
 
-    override fun onAppClick(appInfo: AppInfo) {
-        val intent = applicationContext.packageManager
-                .getLaunchIntentForPackage(appInfo.packageName)
+    override fun onAppClick(activityInfo: ActivityInfo) {
+        val componentName = ComponentName(activityInfo.packageName, activityInfo.name)
+        val intent = Intent(Intent.ACTION_MAIN).apply {
+            addCategory(Intent.CATEGORY_LAUNCHER)
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or
+                    Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED
+            component = componentName
+        }
         startActivity(intent)
     }
 
@@ -32,15 +39,22 @@ class MainActivity : AppCompatActivity(), HomeAppGridFragment.InteractionListene
     }
 
     private fun initDock() {
-        for (appInfo in model.dockApps) {
+        for (activityInfo in model.dockActivities) {
             val iconView = layoutInflater.inflate(R.layout.dock_app, content, false)
                     .dock_app
-            iconView.apply {
-                setImageDrawable(appInfo.icon)
-                setOnClickListener { onAppClick(appInfo) }
+            iconView.setImageDrawable(activityInfo.icon)
+
+            // TODO separate
+            iconView.setOnClickListener {
+                if (activityInfo.packageName == BuildConfig.APPLICATION_ID) {
+                    val intent = Intent(this, MainParentActivity::class.java)
+                    startActivity(intent)
+                } else {
+                    onAppClick(activityInfo)
+                }
             }
             iconView.layoutParams = iconView.layoutParams.let {
-                it.width = dock.width / MainActivityModel.APPS_IN_DOCK
+                it.width = dock.width / model.iconsInDock
                 it
             }
             dock.addView(iconView)

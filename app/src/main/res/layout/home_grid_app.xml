@@ -26,7 +26,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/icon"
                 app:layout_constraintBottom_toBottomOf="parent"
-                style="@style/AppIconNameTheme"
+                style="@style/home_grid_app_label"
                 tools:text="App name"
                 tools:textColor="@android:color/black"
                 tools:background="@android:color/holo_blue_light"
