@@ -1,1 +1,2 @@
 disable halving the screen (multitask mode)
+adaptive icons

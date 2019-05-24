@@ -6,7 +6,7 @@ class MainActivityModel {
     val iconsInDock: Int
 
     init {
-        val context = MainManager.appContext()
+        val context = MainManager.context()
         val activities = MainManager.appsManager
                 .allowedActivities()
                 .filter { it.packageName != BuildConfig.APPLICATION_ID }
@@ -14,8 +14,8 @@ class MainActivityModel {
         activities.add(ActivityInfo(
                 "",
                 BuildConfig.APPLICATION_ID,
-                context.getString(R.string.parents_mode_icon_label),
-                MainManager.getDrawable(R.drawable.lock_icon)
+                context.getString(R.string.parent_mode),
+                MainManager.getDrawable(R.drawable.unlock_icon_round)
         ))
         val packagesInDock = listOf(
                 "com.google.android.dialer",

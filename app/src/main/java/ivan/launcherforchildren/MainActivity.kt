@@ -43,15 +43,13 @@ class MainActivity : AppCompatActivity(), HomeAppGridFragment.InteractionListene
             val iconView = layoutInflater.inflate(R.layout.dock_app, content, false)
                     .dock_app
             iconView.setImageDrawable(activityInfo.icon)
-
-            // TODO separate
-            iconView.setOnClickListener {
-                if (activityInfo.packageName == BuildConfig.APPLICATION_ID) {
-                    val intent = Intent(this, MainParentActivity::class.java)
+            if (activityInfo.packageName == BuildConfig.APPLICATION_ID) {
+                iconView.setOnClickListener {
+                    val intent = Intent(this, AppBlacklistActivity::class.java)
                     startActivity(intent)
-                } else {
-                    onAppClick(activityInfo)
                 }
+            } else {
+                iconView.setOnClickListener { onAppClick(activityInfo) }
             }
             iconView.layoutParams = iconView.layoutParams.let {
                 it.width = dock.width / model.iconsInDock

@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Kid\'s Shell</string>
-    <string name="parents_mode_icon_label">Parent\'s Mode</string>
+    <string name="parent_mode">Parent\'s Mode</string>
+    <string name="child_mode">Child\'s mode</string>
 </resources>

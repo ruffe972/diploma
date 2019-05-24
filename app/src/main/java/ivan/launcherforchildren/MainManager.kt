@@ -4,11 +4,11 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 
 object MainManager {
-    val appsManager = AppsManager(appContext())
+    val appsManager = AppsManager(context())
 
-    fun appContext(): Context = app().applicationContext
-    fun getDrawable(id: Int): Drawable = appContext().getDrawable(id) ?: appIcon()
+    fun context(): Context = app().applicationContext
+    fun getDrawable(id: Int): Drawable = context().getDrawable(id) ?: appIcon()
     private fun app() = App.instance
-    private fun appIcon() = appContext().packageManager
+    private fun appIcon() = context().packageManager
             .getApplicationIcon(BuildConfig.APPLICATION_ID)
 }
