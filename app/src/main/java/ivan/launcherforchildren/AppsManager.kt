@@ -4,8 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import java.io.File
-import java.io.ObjectInputStream
-import java.io.ObjectOutputStream
+import java.io.OutputStreamWriter
 
 data class ActivityInfo(
         val name: String,
@@ -20,8 +19,8 @@ class AppsManager(context: Context) {
         const val CONFIG_FILE_NAME = "app_manager"
     }
 
-    private lateinit var allowedPackages: Set<String>
-    private val allActivities: List<ActivityInfo>
+    private lateinit var allowedPackages: MutableSet<String>
+    val allActivities: List<ActivityInfo>
 
     init {
         val intent = Intent(Intent.ACTION_MAIN, null)
@@ -39,16 +38,24 @@ class AppsManager(context: Context) {
         load(context)
     }
 
+    fun allowPackage(packageName: String) = allowedPackages.add(packageName)
+
+    fun blockPackage(packageName: String) = allowedPackages.remove(packageName)
+
+    fun isAllowed(packageName: String) = packageName in allowedPackages
+
     fun allowedActivities(): List<ActivityInfo> {
         return allActivities.filter {
             it.packageName in allowedPackages
         }
     }
 
-    private fun save(context: Context) {
+    fun save(context: Context) {
         context.openFileOutput(CONFIG_FILE_NAME, Context.MODE_PRIVATE).use { fileStream ->
-            ObjectOutputStream(fileStream).use { objectStream ->
-                objectStream.writeObject(allowedPackages)
+            OutputStreamWriter(fileStream).use { writer ->
+                allowedPackages.forEach {
+                    writer.write(it + '\n')
+                }
             }
         }
     }
@@ -57,17 +64,14 @@ class AppsManager(context: Context) {
             .toSet()
 
     private fun load(context: Context) {
-        if (File(CONFIG_FILE_NAME).exists()) {
-            context.openFileInput(CONFIG_FILE_NAME).use { fileStream ->
-                ObjectInputStream(fileStream).use { objectStream ->
-                    allowedPackages = (objectStream.readObject() as List<*>)
-                            .map { it as String }
-                            .toSet()
-                            .intersect(installedPackages())
-                }
-            }
+        val file = File(context.filesDir, CONFIG_FILE_NAME)
+        allowedPackages = if (file.exists()) {
+            file.readLines()
+                    .toSet()
+                    .intersect(installedPackages())
+                    .toMutableSet()
         } else {
-            allowedPackages = installedPackages()
+            installedPackages().toMutableSet()
         }
     }
 }

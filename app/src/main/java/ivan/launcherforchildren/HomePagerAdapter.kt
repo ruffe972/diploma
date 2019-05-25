@@ -5,7 +5,8 @@ import androidx.fragment.app.FragmentPagerAdapter
 
 class HomePagerAdapter(
         fm: FragmentManager,
-        private val model: MainActivityModel): FragmentPagerAdapter(fm) {
+        private val model: MainActivityModel
+): FragmentPagerAdapter(fm) {
 
     override fun getItem(position: Int) = HomeAppGridFragment.newInstance(position)
 

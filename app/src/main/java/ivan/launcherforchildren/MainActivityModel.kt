@@ -19,8 +19,12 @@ class MainActivityModel {
         ))
         val packagesInDock = listOf(
                 "com.google.android.dialer",
+                "com.android.dialer",
                 "com.android.contacts",
                 "com.google.android.apps.messaging",
+                "com.android.messaging",
+                "com.google.android.deskclock",
+                "com.android.deskclock",
                 BuildConfig.APPLICATION_ID
         )
         dockActivities = activities.filter {

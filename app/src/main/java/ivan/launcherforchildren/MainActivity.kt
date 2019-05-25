@@ -11,6 +11,9 @@ import kotlinx.android.synthetic.main.dock_app.view.*
 class MainActivity : AppCompatActivity(), HomeAppGridFragment.InteractionListener {
     val model = MainActivityModel()
 
+    override fun onBackPressed() {
+    }
+
     override fun onAppClick(activityInfo: ActivityInfo) {
         val componentName = ComponentName(activityInfo.packageName, activityInfo.name)
         val intent = Intent(Intent.ACTION_MAIN).apply {
@@ -45,7 +48,7 @@ class MainActivity : AppCompatActivity(), HomeAppGridFragment.InteractionListene
             iconView.setImageDrawable(activityInfo.icon)
             if (activityInfo.packageName == BuildConfig.APPLICATION_ID) {
                 iconView.setOnClickListener {
-                    val intent = Intent(this, AppBlacklistActivity::class.java)
+                    val intent = Intent(this, BlacklistActivity::class.java)
                     startActivity(intent)
                 }
             } else {

@@ -8,6 +8,7 @@ object MainManager {
 
     fun context(): Context = app().applicationContext
     fun getDrawable(id: Int): Drawable = context().getDrawable(id) ?: appIcon()
+
     private fun app() = App.instance
     private fun appIcon() = context().packageManager
             .getApplicationIcon(BuildConfig.APPLICATION_ID)
