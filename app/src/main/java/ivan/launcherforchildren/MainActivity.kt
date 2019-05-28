@@ -3,13 +3,14 @@ package ivan.launcherforchildren
 import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
-import android.view.ViewTreeObserver
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.dock_app.view.*
 
 class MainActivity : AppCompatActivity(), HomeAppGridFragment.InteractionListener {
-    val model = MainActivityModel()
+    lateinit var model: MainActivityModel
+        private set
+    private lateinit var adapter: HomePagerAdapter
 
     override fun onBackPressed() {
     }
@@ -28,20 +29,32 @@ class MainActivity : AppCompatActivity(), HomeAppGridFragment.InteractionListene
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        view_pager.adapter = HomePagerAdapter(supportFragmentManager, model)
+    }
 
-        val viewTreeObserver = dock.viewTreeObserver
-        if (viewTreeObserver.isAlive) {
-            viewTreeObserver.addOnGlobalLayoutListener(object: ViewTreeObserver.OnGlobalLayoutListener {
-                override fun onGlobalLayout() {
-                    dock.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                    initDock()
-                }
-            })
+    override fun onResume() {
+        super.onResume()
+        refresh()
+    }
+
+    private fun refresh() {
+        model = MainActivityModel()
+        dock.callOnceOnGlobalLayout(::refreshDock)
+        dock.requestLayout()
+        refreshViewPager()
+    }
+
+    private fun refreshViewPager() {
+        if (!::adapter.isInitialized) {
+            adapter = HomePagerAdapter(supportFragmentManager, model)
+            view_pager.adapter = adapter
+        } else {
+            adapter.model = model
+            adapter.notifyDataSetChanged()
         }
     }
 
-    private fun initDock() {
+    private fun refreshDock() {
+        dock.removeAllViews()
         for (activityInfo in model.dockActivities) {
             val iconView = layoutInflater.inflate(R.layout.dock_app, content, false)
                     .dock_app

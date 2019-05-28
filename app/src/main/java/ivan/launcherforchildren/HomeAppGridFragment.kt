@@ -5,11 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TableLayout
 import android.widget.TableRow
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.home_grid_app.view.*
-import android.view.ViewTreeObserver.OnGlobalLayoutListener
-import android.widget.TableLayout
 
 private const val ARG_SCREEN_NUMBER = "screen_number"
 
@@ -86,25 +85,18 @@ class HomeAppGridFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val viewTreeObserver = view.viewTreeObserver
-        if (viewTreeObserver.isAlive) {
-            viewTreeObserver.addOnGlobalLayoutListener(object: OnGlobalLayoutListener {
-                override fun onGlobalLayout() {
-                    view.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                    fillGrid(view as ViewGroup)
-                }
-            })
-        }
+        view.callOnceOnGlobalLayout { fillGrid(view as ViewGroup) }
     }
 
     companion object {
         @JvmStatic
-        fun newInstance(screenNumber: Int) =
-                HomeAppGridFragment().apply {
-                    arguments = Bundle().apply {
-                        putInt(ARG_SCREEN_NUMBER, screenNumber)
-                    }
+        fun newInstance(screenNumber: Int): HomeAppGridFragment {
+            return HomeAppGridFragment().apply {
+                arguments = Bundle().apply {
+                    putInt(ARG_SCREEN_NUMBER, screenNumber)
                 }
+            }
+        }
     }
 }
 

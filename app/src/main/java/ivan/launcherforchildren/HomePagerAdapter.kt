@@ -1,14 +1,16 @@
 package ivan.launcherforchildren
 
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentPagerAdapter
+import androidx.fragment.app.FragmentStatePagerAdapter
 
 class HomePagerAdapter(
         fm: FragmentManager,
-        private val model: MainActivityModel
-): FragmentPagerAdapter(fm) {
+        var model: MainActivityModel
+): FragmentStatePagerAdapter(fm) {
 
     override fun getItem(position: Int) = HomeAppGridFragment.newInstance(position)
 
     override fun getCount(): Int = model.activityLists.count()
+
+    override fun getItemPosition(`object`: Any) = POSITION_NONE
 }
