@@ -1,4 +1,4 @@
-package ivan.launcherforchildren
+package ru.edu.masu.kids_shell
 
 import android.view.LayoutInflater
 import android.view.View

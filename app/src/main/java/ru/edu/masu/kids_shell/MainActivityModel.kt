@@ -1,4 +1,4 @@
-package ivan.launcherforchildren
+package ru.edu.masu.kids_shell
 
 class MainActivityModel {
     val activityLists: List<List<ActivityInfo>>

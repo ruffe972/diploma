@@ -1,4 +1,4 @@
-package ivan.launcherforchildren
+package ru.edu.masu.kids_shell
 
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
