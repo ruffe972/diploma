@@ -1,4 +1,0 @@
-на паузу активити режима ребёнка начинать запрашивать инфу у менеджера о возобновлённых активити.
-disable halving the screen (multitask mode)
-adaptive icons
-installing/uninstalling apps

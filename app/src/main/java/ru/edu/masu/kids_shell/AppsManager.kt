@@ -16,10 +16,10 @@ data class ActivityInfo(
 class AppsManager(context: Context) {
 
     companion object {
-        const val CONFIG_FILE_NAME = "app_manager"
+        private const val CONFIG_FILE_NAME = "app_manager"
     }
 
-    private lateinit var allowedPackages: MutableSet<String>
+    private var allowedPackages: MutableSet<String> = mutableSetOf()
     val allActivities: List<ActivityInfo>
 
     init {
@@ -69,9 +69,8 @@ class AppsManager(context: Context) {
             file.readLines()
                     .toSet()
                     .intersect(installedPackages())
-                    .toMutableSet()
         } else {
-            installedPackages().toMutableSet()
-        }
+            installedPackages()
+        }.toMutableSet()
     }
 }

@@ -10,8 +10,6 @@ import android.widget.TableRow
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.home_grid_app.view.*
 
-private const val ARG_SCREEN_NUMBER = "screen_number"
-
 // Single grid of apps on the home screen above the dock.
 class HomeAppGridFragment : Fragment() {
     private var activityInfoList: List<ActivityInfo>? = null
@@ -55,6 +53,11 @@ class HomeAppGridFragment : Fragment() {
         }
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        view.callOnceOnGlobalLayout { fillGrid(view as ViewGroup) }
+    }
+
     private fun fillGrid(view: ViewGroup) {
         val appInfoMatrix = (activityInfoList ?: return)
                 .chunked(MainActivityModel.APPS_COLUMNS_NUMBER)
@@ -83,12 +86,9 @@ class HomeAppGridFragment : Fragment() {
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        view.callOnceOnGlobalLayout { fillGrid(view as ViewGroup) }
-    }
-
     companion object {
+        private const val ARG_SCREEN_NUMBER = "screen_number"
+
         @JvmStatic
         fun newInstance(screenNumber: Int): HomeAppGridFragment {
             return HomeAppGridFragment().apply {

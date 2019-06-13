@@ -33,7 +33,7 @@ class BlacklistActivity : AppCompatActivity(), BlacklistInteractionListener {
                 .allActivities
                 .filter { it.packageName != BuildConfig.APPLICATION_ID }
         app_blacklist.setHasFixedSize(true)  // Improves performance
-        app_blacklist.adapter = BlacklistAdapter(activities, this)
+        app_blacklist.adapter = BlacklistAdapter(appsManager, activities, this)
         app_blacklist.layoutManager = LinearLayoutManager(this)
     }
 

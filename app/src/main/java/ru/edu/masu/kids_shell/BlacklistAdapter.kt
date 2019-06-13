@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.blacklist_item.view.*
 
 class BlacklistAdapter(
+        private val appsManager: AppsManager,
         private val activities: List<ActivityInfo>,
         private val listener: BlacklistInteractionListener
 ): RecyclerView.Adapter<BlacklistAdapter.ViewHolder>() {
@@ -27,8 +28,7 @@ class BlacklistAdapter(
         holder.apply {
             icon.setImageDrawable(activityInfo.icon)
             textView.text = activityInfo.labelName
-            checkbox.isChecked = MainManager.appsManager
-                    .isAllowed(activityInfo.packageName)
+            checkbox.isChecked = appsManager.isAllowed(activityInfo.packageName)
             checkbox.setOnClickListener { listener.onCheckboxClick(checkbox, activityInfo) }
         }
     }
