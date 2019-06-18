@@ -30,7 +30,7 @@ class BlacklistActivity : AppCompatActivity(), BlacklistInteractionListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_blacklist)
         val activities = appsManager
-                .allActivities
+                .allLauncherActivities
                 .filter { it.packageName != BuildConfig.APPLICATION_ID }
         app_blacklist.setHasFixedSize(true)  // Improves performance
         app_blacklist.adapter = BlacklistAdapter(appsManager, activities, this)
@@ -44,7 +44,7 @@ class BlacklistActivity : AppCompatActivity(), BlacklistInteractionListener {
 
     override fun onStop() {
         super.onStop()
-        appsManager.save(applicationContext)
+        appsManager.save()
     }
 
     @Suppress("UNUSED_PARAMETER")

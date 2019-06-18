@@ -11,6 +11,7 @@ class MainActivity : AppCompatActivity(), HomeAppGridFragment.InteractionListene
     lateinit var model: MainActivityModel
         private set
     private lateinit var adapter: HomePagerAdapter
+    private val appsManager = MainManager.appsManager
 
     override fun onBackPressed() {
     }
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity(), HomeAppGridFragment.InteractionListene
 
     override fun onResume() {
         super.onResume()
+        appsManager.lock()
         refresh()
     }
 
@@ -63,6 +65,7 @@ class MainActivity : AppCompatActivity(), HomeAppGridFragment.InteractionListene
                 iconView.setOnClickListener {
                     val intent = Intent(this, BlacklistActivity::class.java)
                     startActivity(intent)
+                    appsManager.unlock()
                 }
             } else {
                 iconView.setOnClickListener { onAppClick(activityInfo) }
