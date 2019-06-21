@@ -1,5 +1,16 @@
 <resources>
     <string name="app_name">Kid\'s Shell</string>
-    <string name="parent_mode">Parent\'s Mode</string>
-    <string name="child_mode">Child\'s mode</string>
+    <string name="parent_mode">Режим родителя</string>
+    <string name="child_mode">Режим ребёнка</string>
+    <string name="pin_code_enter">Ввод пароля</string>
+    <string name="pins_do_not_match">Пароли не совпадают</string>
+    <string name="pw_change_success">Смена пароля прошла успешно</string>
+    <string name="initial_pin_text">Перед блокировкой необходимо придумать пароль</string>
+    <string name="enter_new_pin">Введите новый пароль</string>
+    <string name="repeat_pin">Повторите этот пароль</string>
+    <string name="enter_pin">Введите пароль</string>
+    <string name="preference_file_key">ru.edu.masu.kids_shell.preferences</string>
+    <string name="pin_prefs_key">pin</string>
+    <string name="change_pin">Сменить пароль</string>
+    <string name="wrong_pin">Неверный пароль</string>
 </resources>

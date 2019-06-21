@@ -1,2 +1,8 @@
+на домашнем экране надо рисовать щит как у конкурента
+попап о разрешениях эпп юзаге
+fix MainManag leak
+вынести в сёрвис таймер? а хэндлер прям лучше таймера?
+launch app on reboot
+block notifications
 adaptive icons
-installing/uninstalling apps
+installing/uninstalling apps: what happens?

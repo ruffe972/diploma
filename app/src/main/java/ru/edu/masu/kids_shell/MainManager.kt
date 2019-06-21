@@ -4,7 +4,7 @@ import android.content.Context
 import android.graphics.drawable.Drawable
 
 object MainManager {
-    val appsManager = AppsManager(context())
+    val appsManager = AppsManager(::context)
 
     fun context(): Context = app().applicationContext
     fun getDrawable(id: Int): Drawable = context().getDrawable(id) ?: appIcon()

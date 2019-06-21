@@ -2,4 +2,6 @@
 <resources>
     <dimen name="home_grid_app_icon_size">54dp</dimen>
     <dimen name="vertical_dock_padding">8dp</dimen>
+    <dimen name="pin_lock_content_spacing">30dp</dimen>
+    <dimen name="pin_lock_text_padding">8dp</dimen>
 </resources>

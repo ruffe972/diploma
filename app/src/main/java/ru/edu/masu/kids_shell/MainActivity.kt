@@ -7,7 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.dock_app.view.*
 
-class MainActivity : AppCompatActivity(), HomeAppGridFragment.InteractionListener {
+class MainActivity :
+        AppCompatActivity(),
+        HomeAppGridFragment.InteractionListener {
     lateinit var model: MainActivityModel
         private set
     private lateinit var adapter: HomePagerAdapter
@@ -63,9 +65,9 @@ class MainActivity : AppCompatActivity(), HomeAppGridFragment.InteractionListene
             iconView.setImageDrawable(activityInfo.icon)
             if (activityInfo.packageName == BuildConfig.APPLICATION_ID) {
                 iconView.setOnClickListener {
-                    val intent = Intent(this, BlacklistActivity::class.java)
+                    val intent = Intent(this@MainActivity, PinLockActivity::class.java)
+                    intent.putExtra(PinLockActivity.Mode.UNLOCK_PIN)
                     startActivity(intent)
-                    appsManager.unlock()
                 }
             } else {
                 iconView.setOnClickListener { onAppClick(activityInfo) }

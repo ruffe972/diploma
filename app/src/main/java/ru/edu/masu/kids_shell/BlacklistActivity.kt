@@ -1,5 +1,6 @@
 package ru.edu.masu.kids_shell
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -29,6 +30,7 @@ class BlacklistActivity : AppCompatActivity(), BlacklistInteractionListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_blacklist)
+        appsManager.unlock()
         val activities = appsManager
                 .allLauncherActivities
                 .filter { it.packageName != BuildConfig.APPLICATION_ID }
@@ -48,11 +50,28 @@ class BlacklistActivity : AppCompatActivity(), BlacklistInteractionListener {
     }
 
     @Suppress("UNUSED_PARAMETER")
-    fun goToChildMode(item: MenuItem) {
-        val intent = Intent(this, MainActivity::class.java).apply {
-            flags = (Intent.FLAG_ACTIVITY_NEW_TASK
-                    or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-        }
+    fun changePin(item: MenuItem) {
+        val intent = Intent(this, PinLockActivity::class.java)
+        intent.putExtra(PinLockActivity.Mode.CHANGE_EXISTING_PIN)
         startActivity(intent)
+    }
+
+    @Suppress("UNUSED_PARAMETER")
+    fun tryGoingToChildMode(item: MenuItem) {
+        val sharedPref = getSharedPreferences(
+                getString(R.string.preference_file_key),
+                Context.MODE_PRIVATE
+        )
+        if (sharedPref.contains(getString(R.string.pin_prefs_key))) {
+            val intent = Intent(this, MainActivity::class.java).apply {
+                flags = (Intent.FLAG_ACTIVITY_NEW_TASK
+                        or Intent.FLAG_ACTIVITY_CLEAR_TASK)
+            }
+            startActivity(intent)
+        } else {
+            val intent = Intent(this, PinLockActivity::class.java)
+            intent.putExtra(PinLockActivity.Mode.INITIAL_PIN_SET)
+            startActivity(intent)
+        }
     }
 }
