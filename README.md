@@ -1,2 +1,5 @@
 # Kid's Shell for Android
-This program is in early stages of development.
+
+Приложение по обеспечению родительского контроля для Android, уникальное в своём роде – позволяет родителю ограничивать использование устройства ребёнком, и при этом не нарушает его приватности за счёт открытого исходного кода.
+
+[Скачать](https://play.google.com/store/apps/details?id=ru.edu.masu.kids_shell)
